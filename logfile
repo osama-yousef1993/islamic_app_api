@@ -1,0 +1,141 @@
+2023-11-27 13:07:09.839 +03 [97459] FATAL:  lock file "postmaster.pid" already exists
+2023-11-27 13:07:09.839 +03 [97459] HINT:  Is another postmaster (PID 39959) running in data directory "/opt/homebrew/var/postgres"?
+2023-11-27 13:07:57.072 +03 [99610] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-11-27 13:07:57.073 +03 [99610] LOG:  could not bind IPv6 address "::1": Address already in use
+2023-11-27 13:07:57.073 +03 [99610] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-11-27 13:07:57.073 +03 [99610] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2023-11-27 13:07:57.073 +03 [99610] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-11-27 13:07:57.073 +03 [99610] WARNING:  could not create listen socket for "localhost"
+2023-11-27 13:07:57.073 +03 [99610] FATAL:  could not create any TCP/IP sockets
+2023-11-27 13:07:57.073 +03 [99610] LOG:  database system is shut down
+2023-11-27 13:09:07.137 +03 [2703] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-11-27 13:09:07.138 +03 [2703] LOG:  listening on IPv6 address "::1", port 5432
+2023-11-27 13:09:07.138 +03 [2703] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-11-27 13:09:07.138 +03 [2703] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2023-11-27 13:09:07.143 +03 [2704] LOG:  database system was shut down at 2023-11-27 13:07:53 +03
+2023-11-27 13:09:07.146 +03 [2703] LOG:  database system is ready to accept connections
+2023-11-27 13:11:39.963 +03 [6116] ERROR:  type "timestampz" does not exist at character 82
+2023-11-27 13:11:39.963 +03 [6116] STATEMENT:  CREATE TABLE "sections" (
+	  "id" UUID PRIMARY KEY,
+	  "name" text,
+	  "created_at" timestampz DEFAULT (now()),
+	  "updated_at" timestampz DEFAULT (now())
+	);
+	CREATE INDEX ON "sections" ("id");
+2023-11-27 13:13:53.338 +03 [14842] FATAL:  role "management_db" does not exist
+2023-11-27 13:15:17.573 +03 [18360] ERROR:  null value in column "id" of relation "sections" violates not-null constraint
+2023-11-27 13:15:17.573 +03 [18360] DETAIL:  Failing row contains (null, Test Section, 2023-11-27 10:15:17.572362+03, 2023-11-27 10:15:17.572368+03).
+2023-11-27 13:15:17.573 +03 [18360] STATEMENT:  INSERT INTO sections (name, created_at, updated_at) VALUES ('Test Section', '2023-11-27T10:15:17.572362'::timestamp, '2023-11-27T10:15:17.572368'::timestamp) RETURNING *
+2023-11-27 13:18:48.745 +03 [26782] ERROR:  duplicate key value violates unique constraint "sections_pkey"
+2023-11-27 13:18:48.745 +03 [26782] DETAIL:  Key (id)=(fd8ce912-1a25-4bfc-91ae-eaa94375591d) already exists.
+2023-11-27 13:18:48.745 +03 [26782] STATEMENT:  INSERT INTO sections (id, name, created_at, updated_at) VALUES ('fd8ce912-1a25-4bfc-91ae-eaa94375591d'::uuid::UUID, 'test section', '2023-11-27T10:18:48.744658'::timestamp, '2023-11-27T10:18:48.744663'::timestamp) RETURNING *
+2023-11-27 13:19:38.844 +03 [30131] ERROR:  duplicate key value violates unique constraint "sections_pkey"
+2023-11-27 13:19:38.844 +03 [30131] DETAIL:  Key (id)=(fd8ce912-1a25-4bfc-91ae-eaa94375591d) already exists.
+2023-11-27 13:19:38.844 +03 [30131] STATEMENT:  INSERT INTO sections (id, name, created_at, updated_at) VALUES ('fd8ce912-1a25-4bfc-91ae-eaa94375591d'::uuid::UUID, 'test section', '2023-11-27T10:19:38.841395'::timestamp, '2023-11-27T10:19:38.841399'::timestamp) RETURNING *
+2023-11-27 14:04:14.329 +03 [77742] ERROR:  null value in column "id" of relation "sections" violates not-null constraint
+2023-11-27 14:04:14.329 +03 [77742] DETAIL:  Failing row contains (null, dqmyRYcbFvnQnWhZKmxZvskioflnG, 2023-11-27 11:04:14.328098+03, 2023-11-27 11:04:14.328103+03).
+2023-11-27 14:04:14.329 +03 [77742] STATEMENT:  INSERT INTO sections (name, created_at, updated_at) VALUES ('dqmyRYcbFvnQnWhZKmxZvskioflnG', '2023-11-27T11:04:14.328098'::timestamp, '2023-11-27T11:04:14.328103'::timestamp) RETURNING *
+2023-11-27 21:55:46.256 +03 [6116] ERROR:  type "timestampz" does not exist at character 148
+2023-11-27 21:55:46.256 +03 [6116] STATEMENT:  CREATE TABLE "projects" (
+	  "id" UUID PRIMARY KEY,
+	  "name" text UNIQUE,
+	  "section_id" UUID,
+	  "place" text,
+	  "description" text,
+	  "start_date" timestampz,
+	  "end_date" timestampz,
+	  "project_evaluation" float,
+	  "created_at" TIMESTAMPTZ DEFAULT Now(),
+	  "updated_at" TIMESTAMPTZ DEFAULT Now()
+	);
+	CREATE INDEX ON "projects" ("id");
+	
+	CREATE INDEX ON "projects" ("name");
+	ALTER TABLE "projects" ADD FOREIGN KEY ("section_id") REFERENCES "sections" ("id");
+2023-11-28 11:19:31.614 +03 [97536] ERROR:  duplicate key value violates unique constraint "projects_name_key"
+2023-11-28 11:19:31.614 +03 [97536] DETAIL:  Key (name)=(KhUTMFaD) already exists.
+2023-11-28 11:19:31.614 +03 [97536] STATEMENT:  INSERT INTO projects (id, name, place, description, start_date, end_date, section_id, project_evaluation, created_at, updated_at) VALUES ('6394540a-4161-4bc4-b345-5e4e7e1de190'::uuid::UUID, 'KhUTMFaD', 'OOdmujGiTlO', 'gimiTqGUhFq', '2023-11-28T08:17:06.351000+00:00'::timestamptz, '2023-11-28T08:17:06.351000+00:00'::timestamptz, 'c3fe6e5b-56dd-401f-97d8-be81f5f32217'::uuid, 10.0, '2023-11-28T08:19:31.612365'::timestamp, '2023-11-28T08:19:31.612372'::timestamp) RETURNING *
+2023-11-28 11:27:36.017 +03 [27740] ERROR:  duplicate key value violates unique constraint "projects_name_key"
+2023-11-28 11:27:36.017 +03 [27740] DETAIL:  Key (name)=(agsKVZAyTLq) already exists.
+2023-11-28 11:27:36.017 +03 [27740] STATEMENT:  INSERT INTO projects (id, name, place, description, start_date, end_date, section_id, project_evaluation, created_at, updated_at) VALUES ('be48724f-ea61-468c-bf80-8006a678fdda'::uuid::UUID, 'agsKVZAyTLq', 'alxuu', 'hxYsgjyjnNsoLJEPxRqxhticsPoEhGrDnPZjFkFoHgOLhfqpt', '2023-11-28T08:26:55.764000+00:00'::timestamptz, '2023-11-28T08:26:55.764000+00:00'::timestamptz, '9692f70f-36b0-43f5-a6b4-32e48cc565a5'::uuid, 1000.0, '2023-11-28T08:27:36.015791'::timestamp, '2023-11-28T08:27:36.015796'::timestamp) RETURNING *
+2023-11-28 11:59:59.198 +03 [6116] ERROR:  column "section" referenced in foreign key constraint does not exist
+2023-11-28 11:59:59.198 +03 [6116] STATEMENT:  CREATE TABLE "partners" (
+	  "id" UUID PRIMARY KEY,
+	  "name" text,
+	  "section_id" UUID,
+	  "amount" float,
+	  "pre_amount" float,
+	  "created_at" TIMESTAMPTZ DEFAULT Now(),
+	  "updated_at" TIMESTAMPTZ DEFAULT Now()
+	);
+	CREATE INDEX ON "partners" ("id");
+	
+	CREATE INDEX ON "partners" ("name");
+	ALTER TABLE "partners" ADD FOREIGN KEY ("section") REFERENCES "sections" ("id");
+2023-11-28 12:37:13.133 +03 [6116] ERROR:  type "timestampz" does not exist at character 120
+2023-11-28 12:37:13.133 +03 [6116] STATEMENT:  CREATE TABLE "covenants_cash" (
+	  "id" UUID PRIMARY KEY,
+	  "partner_id" UUID,
+	  "name" text,
+	  "price" float,
+	  "date" timestampz,
+	  "created_at" TIMESTAMPTZ DEFAULT Now(),
+	  "updated_at" TIMESTAMPTZ DEFAULT Now()
+	);
+	CREATE INDEX ON "covenants_cash" ("id");
+	
+	CREATE INDEX ON "covenants_cash" ("name");
+	ALTER TABLE
+	  "covenants_cash"
+	ADD
+	  FOREIGN KEY ("partner_id") REFERENCES "partners" ("id");
+2023-11-28 13:50:10.175 +03 [6116] ERROR:  type "timestampz" does not exist at character 128
+2023-11-28 13:50:10.175 +03 [6116] STATEMENT:  CREATE TABLE "covenants_devices" (
+	  "id" UUID PRIMARY KEY,
+	  "worker_id" UUID,
+	  "title" text UNIQUE,
+	  "desc" text,
+	  "date" timestampz,
+	  "created_at" TIMESTAMPTZ DEFAULT Now(),
+	  "updated_at" TIMESTAMPTZ DEFAULT Now()
+	);
+	CREATE INDEX ON "covenants_devices" ("id");
+	
+	CREATE INDEX ON "covenants_devices" ("title");
+	ALTER TABLE
+	  "covenants_devices"
+	ADD
+	  FOREIGN KEY ("worker_id") REFERENCES "workers" ("id");
+2023-11-28 14:27:09.100 +03 [58886] ERROR:  column bills.purpose does not exist at character 54
+2023-11-28 14:27:09.100 +03 [58886] STATEMENT:  SELECT bills.id, bills.store_name, bills.buyer_name, bills.purpose, bills.amount, bills.bill_number, bills.project_id, bills.created_at, bills.updated_at, projects.name 
+	FROM bills JOIN projects ON bills.project_id = projects.id 
+	WHERE bills.project_id = projects.id
+2023-11-28 14:28:04.367 +03 [61637] ERROR:  column bills.purpose does not exist at character 54
+2023-11-28 14:28:04.367 +03 [61637] STATEMENT:  SELECT bills.id, bills.store_name, bills.buyer_name, bills.purpose, bills.amount, bills.bill_number, bills.project_id, bills.created_at, bills.updated_at, projects.name 
+	FROM bills JOIN projects ON bills.project_id = projects.id 
+	WHERE bills.project_id = projects.id
+2023-11-28 14:28:22.305 +03 [61637] ERROR:  column bills.purpose does not exist at character 54
+2023-11-28 14:28:22.305 +03 [61637] STATEMENT:  SELECT bills.id, bills.store_name, bills.buyer_name, bills.purpose, bills.amount, bills.bill_number, bills.project_id, bills.created_at, bills.updated_at, projects.name 
+	FROM bills JOIN projects ON bills.project_id = projects.id 
+	WHERE bills.project_id = projects.id
+2023-11-28 14:30:43.613 +03 [68157] ERROR:  column bills.purpose does not exist at character 54
+2023-11-28 14:30:43.613 +03 [68157] STATEMENT:  SELECT bills.id, bills.store_name, bills.buyer_name, bills.purpose, bills.amount, bills.bill_number, bills.project_id, bills.created_at, bills.updated_at, projects.name 
+	FROM bills JOIN projects ON bills.project_id = projects.id 
+	WHERE bills.project_id = projects.id
+2023-11-28 14:38:17.927 +03 [90820] ERROR:  integer out of range
+2023-11-28 14:38:17.927 +03 [90820] STATEMENT:  INSERT INTO bills (id, store_name, buyer_name, item, amount, bill_number, bill_picture, project_id, created_at, updated_at) VALUES ('4df86328-86fb-4fc2-a817-5683030737b0'::uuid::UUID, 'iCqvudmrDmeDmTH', 'TestTest', 'TestTest', 450.0, 2343434340, 'TestTest', '22126da2-a25b-459e-9e96-e41159c87727'::uuid, '2023-11-28T11:38:17.926321'::timestamp, '2023-11-28T11:38:17.926325'::timestamp) RETURNING *
+2023-11-29 13:34:31.468 +03 [82258] ERROR:  table name "contractors" specified more than once
+2023-11-29 13:34:31.468 +03 [82258] STATEMENT:  SELECT contractors.id, contractors.name, contractors.project_id, contractors.section_id, contractors.amount, contractors.paid_amount, contractors.rest_amount, contractors.created_at, contractors.updated_at, sections.name AS name_1, projects.name AS name_2 
+	FROM contractors JOIN sections ON contractors.section_id = sections.id, contractors JOIN projects ON contractors.project_id = projects.id 
+	WHERE contractors.section_id = sections.id
+2023-12-03 23:10:12.232 +03 [93963] ERROR:  invalid input syntax for type uuid: "" at character 250
+2023-12-03 23:10:12.232 +03 [93963] STATEMENT:  INSERT INTO incomes (id, project_id, section_id, receiving_person, gave_person, check_number, payment_number, amount, way_of_receiving, description, receiving_date, created_at, updated_at) VALUES ('97b6f840-10e3-4143-aab1-daa239b0665f'::uuid::UUID, ''::UUID, ''::UUID, 'HBMCOLRYAEAIksydWQYY', 'mQbEtitWWMOmsZoOLRxWUDMlJasTXdSExYQT', 1, 120, 253530.0, '', '', NULL, '2023-12-03T20:10:12.231286'::timestamp, '2023-12-03T20:10:12.231293'::timestamp) RETURNING *
+2023-12-07 12:27:13.111 +03 [58277] ERROR:  invalid input syntax for type uuid: "" at character 250
+2023-12-07 12:27:13.111 +03 [58277] STATEMENT:  INSERT INTO incomes (id, project_id, section_id, receiving_person, gave_person, check_number, payment_number, amount, way_of_receiving, description, receiving_date, created_at, updated_at) VALUES ('989223a4-3181-4e90-8af5-13e05f01f2b5'::uuid::UUID, ''::UUID, ''::UUID, 'NviSjwaubTmvOxPcDvyrnPliD', 'IuiyICPPcUKWEjNIkalofYSdfKXwN', 0, 0, 0, '', '', NULL, '2023-12-07T09:27:13.110049'::timestamp, '2023-12-07T09:27:13.110052'::timestamp) RETURNING *
+2023-12-07 12:34:50.522 +03 [76834] ERROR:  integer out of range
+2023-12-07 12:34:50.522 +03 [76834] STATEMENT:  UPDATE incomes SET receiving_person='icZmVVdhn', gave_person='bgcAMAJvUIRtWjItyqKbxLgFWOBFvLfZ', check_number=123456677880, payment_number=1230, amount=989898980.0, updated_at='2023-12-07T09:34:50.521844'::timestamp WHERE incomes.id = '21fd2b0d-75a2-46bd-84f1-a46029a4e7b5'::uuid::UUID RETURNING *
+2023-12-10 13:36:53.548 +03 [18008] ERROR:  relation "withdraw_contractors" does not exist at character 330
+2023-12-10 13:36:53.548 +03 [18008] STATEMENT:  SELECT withdraw_contractors.id, withdraw_contractors.section_id, withdraw_contractors.project_id, withdraw_contractors.contractor_id, withdraw_contractors.amount, withdraw_contractors.date, withdraw_contractors.created_at, withdraw_contractors.updated_at, sections.name, projects.name AS name_1, contractors.name AS name_2 
+	FROM withdraw_contractors JOIN sections ON withdraw_contractors.section_id = sections.id JOIN projects ON withdraw_contractors.project_id = projects.id JOIN contractors ON withdraw_contractors.contractor_id = contractors.id 
+	WHERE withdraw_contractors.section_id = sections.id AND withdraw_contractors.project_id = projects.id AND withdraw_contractors.contractor_id = contractors.id
+2023-12-20 21:44:42.948 +03 [2703] LOG:  received smart shutdown request
